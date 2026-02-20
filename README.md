@@ -231,9 +231,9 @@ ejecución
 Cada proyecto incluye un archivo `PREGUNTAS.md` con preguntas sobre las
 decisiones técnicas tomadas durante la implementación:
 
--   `/backend/PREGUNTAS.md` — Preguntas sobre arquitectura, manejo de
-    errores HTTP, validaciones, TypeORM Y migraciones.
--   `/frontend/PREGUNTAS.md` — Preguntas sobre componentes, estado,
+-   [`/back/PREGUNTAS.md`](back/PREGUNTAS.md) — Preguntas sobre arquitectura, manejo de
+    errores HTTP, validaciones, TypeORM y migraciones.
+-   [`/front/PREGUNTAS.md`](front/PREGUNTAS.md) — Preguntas sobre componentes, estado,
     formularios, comunicación con la API y ruteo.
 
 **El alumno debe responder todas las preguntas en el mismo archivo**,
