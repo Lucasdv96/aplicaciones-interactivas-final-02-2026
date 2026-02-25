@@ -1,6 +1,6 @@
 import { TableRepository } from "../repositories/TableRepository";  
 import { TableStatus } from "../entities/Table";
-import { Table } from "typeorm";
+import { Table } from "../entities/Table";
 
 export const TableService = {
 
@@ -8,7 +8,7 @@ export const TableService = {
         return TableRepository.findAll();
     },
     
-    async getTableById(id: number) {
+    async getTableById(id: number): Promise<Table> {
         const table = await TableRepository.findById(id);
         if (!table) {
             throw { status: 404, message: `Mesa con id ${id} no encontrada` };
