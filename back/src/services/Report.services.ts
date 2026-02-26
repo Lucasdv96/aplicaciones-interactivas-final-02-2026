@@ -1,5 +1,5 @@
 import { TableRepository } from "../repositories/TableRepository";
-import { ReportRepository } from "../repositories/reportRepository";
+import { ReportRepository } from "../repositories/ReportRepository";
 
 export const ReportService = {
   async getOccupancyByDate(date: string) {

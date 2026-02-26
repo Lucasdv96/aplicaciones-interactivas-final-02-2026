@@ -1,3 +1,4 @@
+import { table } from "console";
 import { AppDataSource } from "../config/data-source";
 import { Reservation, ReservationStatus } from "../entities/Reservation";
 
@@ -19,9 +20,22 @@ export const ReservationRepository = AppDataSource.getRepository(Reservation).ex
         });
     },
 
-    createReservation(data: { customerName: string; partySize: number; status: ReservationStatus; tableId: number; shiftId: number }) {
-        const reservation = this.create(data);
+    createReservation(data: { 
+        customerName: string;
+        partySize: number; 
+        status: ReservationStatus; 
+        tableId: number; 
+        shiftId: number 
+    }) {
+        const reservation = this.create({
+            customerName: data.customerName,
+            partySize: data.partySize,
+            status: data.status,
+            table: { id: data.tableId },
+            shift: { id: data.shiftId },
+        });
         return this.save(reservation);
+
     },
 
     updateReservation(reservation: Reservation) {

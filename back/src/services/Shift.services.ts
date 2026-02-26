@@ -10,6 +10,19 @@ function isValidDate(date: string): boolean {
     return /^\d{4}-\d{2}-\d{2}$/.test(date);
 }
 
+// Verifica si dos rangos de tiempo se solapan
+// Solapamiento: startA < endB && startB < endA
+// Ejemplo válido: 18:00-20:00 y 20:00-22:00 → NO se solapan (20:00 no es < 20:00)
+function timesOverlap(
+    startA: string,
+    endA: string,
+    startB: string,
+    endB: string
+): boolean {
+    return startA < endB && startB < endA;
+}
+
+
 export const ShiftService = {
 
     async getAllShifts() {
@@ -34,10 +47,20 @@ export const ShiftService = {
         if (startTime >= endTime) {
             throw { status: 400, message: "Hora de inicio debe ser menor que hora de fin" };
         }
-
-        const existingShift = await ShiftRepository.findByDate(date, startTime, endTime);
-        if (existingShift) {
-            throw { status: 400, message: "Ya existe un turno para esa fecha y horario" };
+        // Validar que la fecha no sea pasada
+        const today = new Date().toISOString().split("T")[0];
+        if (date < today) {
+            throw { status: 400, message: "No se pueden crear turnos en fechas pasadas" };
+        }
+        // Validar solapamiento con turnos existentes en la misma fecha
+        const shiftsOnDate = await ShiftRepository.findAllByDate(date);
+        for (const existing of shiftsOnDate) {
+            if (timesOverlap(startTime, endTime, existing.startTime, existing.endTime)) {
+                throw {
+                    status: 409,
+                    message: `El turno se solapa con uno existente: ${existing.startTime}-${existing.endTime}`,
+                };
+            }
         }
 
         return ShiftRepository.createShift({ date, startTime, endTime });

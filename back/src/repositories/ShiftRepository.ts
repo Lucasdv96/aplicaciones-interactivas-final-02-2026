@@ -11,14 +11,16 @@ export const ShiftRepository = AppDataSource.getRepository(Shift).extend({
     return this.findOneBy({ id });
   },
 
+  // Busca un turno exacto por fecha+horario (para seed idempotente)
   findByDate(date: string, startTime: string, endTime: string) {
-    return this.findOne({
-      where: {
-        date,
-        startTime,
-        endTime,
-      },
-    });
+      return this.findOne({
+          where: { date, startTime, endTime },
+      });
+  },
+
+  // Busca todos los turnos de una fecha (para validar solapamiento)
+  findAllByDate(date: string) {
+      return this.findBy({ date });
   },
 
   createShift(data: { date: string; startTime: string; endTime: string }) {

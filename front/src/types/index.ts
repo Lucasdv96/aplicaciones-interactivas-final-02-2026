@@ -17,7 +17,7 @@ export interface Reservation {
     id: number;
     customerName: string;
     partySize: number;
-    status: 'CONFIRMED' | 'CANCELED';
+    status: 'CONFIRMED' | 'CANCELLED';
     table: Table;
     shift: Shift;
 }

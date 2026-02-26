@@ -17,7 +17,7 @@ function ReservationsPage() {
 
   useEffect(() => {
     getReservations()
-      .then(data => setReservations(data.filter(r => r.status && r.shift)))
+      .then(data => setReservations(data))
       .catch(() => setError('No se pudieron cargar las reservas.'))
       .finally(() => setLoading(false))
   }, [])
