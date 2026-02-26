@@ -31,3 +31,24 @@ src/
   App.tsx        # Rutas principales
   main.tsx       # Punto de entrada
 ```
+//////////////////////////////////////////////////////////////////
+Frontend
+1. Instalar dependencias
+bash
+cd front
+npm install
+
+2. Iniciar la aplicación
+bas
+hnpm run dev
+La aplicación queda disponible en http://localhost:5173.
+
+El frontend espera que el backend esté corriendo en http://localhost:3000.
+
+
+Orden de ejecución recomendado
+
+Levantar PostgreSQL
+Correr migraciones y seed del backend
+Iniciar el servidor backend (npm run dev en back/)
+Iniciar el frontend (npm run dev en front/)

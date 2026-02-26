@@ -53,3 +53,40 @@ src/
   services/      # Logica de negocio
   index.ts       # Punto de entrada
 ```
+//////////////////////////////////////////////////////
+Sistema de Reservas — Instrucciones de Ejecución
+Requisitos
+
+Node.js 20+
+PostgreSQL 14+
+
+1. Configurar variables de entorno
+Crear un archivo .env en la carpeta back/ con el siguiente contenido:
+env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_NAME=restaurant
+PORT=3000
+
+2. Instalar dependencias
+bash
+cd back
+npm install
+
+3. Crear la base de datos
+Desde pgAdmin o psql, crear una base de datos llamada restaurant.
+
+4. Ejecutar migraciones
+bash
+npm run migration:run
+
+5. Cargar datos de prueba (opcional)
+bash
+npm run seed
+
+6. Iniciar el servidor
+bash
+npm run dev
+El servidor queda disponible en http://localhost:3000.
